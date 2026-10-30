@@ -1,0 +1,11 @@
+{
+  "protocol": "northfield-authority/1.0.0",
+  "suite": "northfield-starter/1.0.0",
+  "files": {
+    "authority.mjs": "10bd508b0fd1cb9285bb693e65de52dccafecdf5d96f23c6ae0c15f4c170c096",
+    "suite.mjs": "5ed8399c0bf7137ae9dc79df45a19bc6cbfda0b30b612777a710caa6d3ef49be",
+    "model.mjs": "ba486f666fb676cf3d710350b98be2482e18dec624c0fadc9de82150b69948ac",
+    "runner.mjs": "36e645e75600d4162e67896c3a0f39f2daadf76a63472c3c180f1531e2474662",
+    "server-rules.ts": "e1eab91f2966af0d130952450acffe5c98588f6afe9c6b948fe2e11430191d65"
+  }
+}

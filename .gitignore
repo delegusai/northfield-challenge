@@ -6,3 +6,7 @@ __pycache__/
 !.env.example
 .DS_Store
 reports/
+demo.json
+replay.json
+agent.json
+regression.json

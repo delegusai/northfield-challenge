@@ -1,5 +1,7 @@
 # Northfield purchasing lab
 
+**New: [public research kit and comparison implementation](research/README.md).** Run the twelve-case experiment, connect your own agent, replay results, or contribute a case. [Try the research lab](https://lab.delegus.ai/research).
+
 Ask a simulated purchasing agent to pay an invoice. Give it an instruction to ignore its limit. See whether a payment actually reaches the ledger.
 
 This is an independent, local experiment in human-agent language and bounded authority. An OpenAI model translates natural-language requests into proposals. You review the proposed payment before the local authority check can record it. There is no real payment system, production connection, or Delegus protocol implementation here.
@@ -8,7 +10,7 @@ This is an independent, local experiment in human-agent language and bounded aut
 
 [Open the public Northfield Challenge](https://lab.delegus.ai): a separate hosted page with natural-language AI proposals, instructions, independent server-side payment checks, isolated visitor sessions, downloadable evidence, and interactive charts from the 150-trial benchmark. Visitors review each proposal before submitting it. The API key is a private server secret. Each session permits five AI requests, with a shared cap of 100 requests per UTC day and at least 10 seconds between requests; failed calls count. Command mode remains available. The live Delegus product is not connected.
 
-[The saved results dashboard](https://northfield-evaluation-results.rr-2e80.chatgpt.site) remains available separately. The public challenge uses a separate Sites source repository and database; this repository retains the original local Python experiment.
+[The saved results dashboard](https://northfield-evaluation-results.rr-2e80.chatgpt.site) remains available separately. The public challenge uses a separate Sites source repository and database; this repository contains the original local Python experiment and the independently versioned research kit in `research/`.
 
 ## Run it
 
