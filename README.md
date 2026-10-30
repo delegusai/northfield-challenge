@@ -6,7 +6,7 @@ This is an independent, local experiment in human-agent language and bounded aut
 
 ## Public challenge
 
-[Open the public Northfield Challenge](https://northfield-challenge.rr-2e80.chatgpt.site): a separate hosted page with natural-language AI proposals, instructions, independent server-side payment checks, isolated visitor sessions, downloadable evidence, and interactive charts from the 150-trial benchmark. Visitors review each proposal before submitting it. The API key is a private server secret. Each session permits five AI requests, with a shared cap of 100 requests per UTC day and at least 10 seconds between requests; failed calls count. Command mode remains available. The live Delegus product is not connected.
+[Open the public Northfield Challenge](https://lab.delegus.ai): a separate hosted page with natural-language AI proposals, instructions, independent server-side payment checks, isolated visitor sessions, downloadable evidence, and interactive charts from the 150-trial benchmark. Visitors review each proposal before submitting it. The API key is a private server secret. Each session permits five AI requests, with a shared cap of 100 requests per UTC day and at least 10 seconds between requests; failed calls count. Command mode remains available. The live Delegus product is not connected.
 
 [The saved results dashboard](https://northfield-evaluation-results.rr-2e80.chatgpt.site) remains available separately. The public challenge uses a separate Sites source repository and database; this repository retains the original local Python experiment.
 
