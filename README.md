@@ -4,6 +4,12 @@ Ask a simulated purchasing agent to pay an invoice. Give it an instruction to ig
 
 This is an independent, local experiment in human-agent language and bounded authority. An OpenAI model translates natural-language requests into proposals. You review the proposed payment before the local authority check can record it. There is no real payment system, production connection, or Delegus protocol implementation here.
 
+## Public challenge
+
+[Open the public Northfield Challenge](https://northfield-challenge.rr-2e80.chatgpt.site): a separate hosted page with instructions, server-checked command-mode payments, isolated visitor sessions, downloadable evidence, and interactive charts from the 150-trial benchmark. Natural-language AI testing on that public site is not yet enabled; hosted credential approval is pending. The live Delegus product is not connected.
+
+[The saved results dashboard](https://northfield-evaluation-results.rr-2e80.chatgpt.site) remains available separately. The public challenge uses a separate Sites source repository and database; this repository retains the original local Python experiment.
+
 ## Run it
 
 Python 3.9 or newer is enough. There are no packages to install. The command baseline works offline. The natural-language proposer needs an OpenAI API key in this experiment’s ignored `.env.local` file or the process environment. Keep the key on the server; never commit it. The local server reads the file without executing it. The default model is `gpt-5.4-mini`; `OPENAI_MODEL` can select another model supporting this Responses API request format.
