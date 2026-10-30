@@ -61,4 +61,4 @@ Research kit code and scenarios use the [MIT license](kit/LICENSE). This does no
 
 ## Contributors
 
-- [@haqinam](https://github.com/haqinam) — Coder
+- [@haqinam](https://github.com/haqinam)

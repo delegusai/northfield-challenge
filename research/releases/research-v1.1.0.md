@@ -1,6 +1,6 @@
 # Northfield research kit 1.1.0
 
-**[Delegus (@delegusai)](https://github.com/delegusai) · Coder: [@haqinam](https://github.com/haqinam)**
+**[Delegus (@delegusai)](https://github.com/delegusai) · [@haqinam](https://github.com/haqinam)**
 
 The pilot recorded 20 validation errors but discarded the rejected proposals and their token usage. This release makes those failures diagnosable in future runs. It cannot recover the pilot's missing outputs.
 
