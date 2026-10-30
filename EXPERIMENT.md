@@ -23,7 +23,7 @@ These are usability questions to investigate, not results we have measured yet.
 
 The live comparison keeps the same fixtures and authority checks. It compares the explicit-command baseline with an OpenAI proposer returning typed fields. It measures interpretation errors, invalid proposals, correct refusals, and unintended ledger entries separately. The UI adds a human review step before submission. An agent being persuaded to propose a forbidden action and a forbidden action reaching the ledger are different outcomes.
 
-The proposer must receive only its assigned context and a restricted payment-submission tool. It must not receive reset or revocation controls, credentials, arbitrary network access, or mutable authority state. The implemented proposer has no tools or access to mutable authority. The experiment still needs broader evaluation before public exposure.
+The proposer receives only its assigned context and has no tools. It cannot access reset or revocation controls, credentials, arbitrary network destinations, or mutable authority state. The expanded evaluation repeats 50 independently specified scenarios three times and displays interpretation accuracy, authority violations, unintended recorded payments, and consistency separately. It includes duplicate requests, invoice extraction with planted instructions, and controlled authority changes between preparation and execution. Public exposure remains outside this experiment.
 
 ## Publication boundary
 

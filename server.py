@@ -17,11 +17,12 @@ WEB = Path(__file__).parent / "web"
 
 
 class LabServer(ThreadingHTTPServer):
-    def __init__(self, port, proposer=None):
+    def __init__(self, port, proposer=None, report_file=None):
         super().__init__(("127.0.0.1", port), Handler)
         self.sessions = {}
         self.session_lock = threading.Lock()
         self.proposer = proposer or Proposer()
+        self.report_file = Path(report_file) if report_file else Path(__file__).parent / "reports/live-evaluation.json"
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -72,6 +73,19 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._valid_host():
             return self._send(403, {"error": "Use the printed local URL."})
+        if self.path == "/api/evaluation":
+            path = self.server.report_file
+            if not path.exists():
+                return self._send(200, {"available":False,"message":"No evaluation report yet. Run the local evaluation to collect results."})
+            try:
+                if path.is_symlink() or path.stat().st_size > 5_000_000:
+                    raise ValueError("Invalid report file")
+                report = json.loads(path.read_text())
+                if not isinstance(report,dict) or report.get("version") != 2:
+                    return self._send(200, {"available":False,"message":"This report uses an older format. Run the expanded evaluation to collect results."})
+                return self._send(200, {"available":True,"report":report})
+            except (OSError, ValueError):
+                return self._send(500, {"error":"The local evaluation report could not be read."})
         if self.path == "/api/config":
             return self._send(200, self.server.proposer.status())
         if self.path == "/api/session":
@@ -81,6 +95,8 @@ class Handler(BaseHTTPRequestHandler):
             except ValueError as error:
                 return self._send(429, {"error": str(error)})
         files = {"/": ("index.html", "text/html; charset=utf-8"), "/app.js": ("app.js", "text/javascript; charset=utf-8"), "/style.css": ("style.css", "text/css; charset=utf-8")}
+        for name, mime in (("results.html", "text/html; charset=utf-8"), ("results.js", "text/javascript; charset=utf-8"), ("results.css", "text/css; charset=utf-8")):
+            files["/results" if name == "results.html" else "/" + name] = (name, mime)
         # Exact asset map preserves the server's closed static-file boundary.
         files["/assets/fonts.css"] = ("assets/fonts.css", "text/css; charset=utf-8")
         files["/assets/delegus-mark.svg"] = ("assets/delegus-mark.svg", "image/svg+xml")

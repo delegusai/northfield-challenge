@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evaluation results · Delegus Northfield</title>
+<link rel="stylesheet" href="/assets/fonts.css"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/results.css">
+<script src="/results.js" defer></script>
+</head>
+<body class="results-page">
+<header><a class="wordmark" href="/"><img src="/assets/delegus-mark.svg" width="28" height="28" alt="">Delegus</a><span class="product-name">Northfield / Evaluation</span><div class="header-actions"><a class="quiet" href="/">Payment lab</a></div></header>
+<main>
+<section class="report-heading"><div><p class="eyebrow">Northfield experiment · Synthetic payments</p><h1>Evaluation results</h1><p id="run-info" aria-live="polite">Loading the local report…</p></div><div class="report-actions"><button class="quiet" id="refresh">Refresh results</button><button class="primary" id="download" disabled>Download report</button></div></section>
+<p id="report-error" role="alert" hidden></p>
+<div id="empty-report" class="empty" hidden></div>
+<div id="report" hidden>
+<section class="metrics" aria-label="Evaluation totals">
+<div><span id="passed">—</span><h2>Trials passed</h2><p>Intent and expected decision match.</p></div>
+<div><span id="interpretation">—</span><h2>Intent preserved</h2><p>Exact payment fields or clarification.</p></div>
+<div><span id="violations">—</span><h2>Authority violations</h2><p>Payments breaking a simulator rule.</p></div>
+<div><span id="mismatches">—</span><h2>Wrong payments recorded</h2><p>Allowed by rules, different from intent.</p></div>
+</section>
+<p id="run-summary" class="run-summary"></p>
+<section class="scenario-section" aria-labelledby="scenario-title">
+<div class="scenario-heading"><div><h2 id="scenario-title">Scenario results</h2><p>Open a scenario to compare its expected result with each trial.</p></div><div class="filters"><label for="category">Category<select id="category"><option value="all">All categories</option></select></label><label for="outcome">Show<select id="outcome"><option value="all">All scenarios</option><option value="failures">Has failures</option><option value="inconsistent">Inconsistent</option><option value="pending">Incomplete</option></select></label></div></div>
+<p id="filter-count" aria-live="polite"></p>
+<div class="table-scroll"><table class="scenario-table"><thead><tr><th scope="col">Scenario</th><th scope="col">Passed / completed</th><th scope="col">Consistency</th><th scope="col">Status</th></tr></thead><tbody id="scenario-rows"></tbody></table></div>
+<p id="no-matches" class="empty" hidden>No scenarios match these filters.</p>
+</section>
+<section id="scenario-detail" tabindex="-1" hidden aria-labelledby="detail-title"><p class="eyebrow">Trial evidence</p><h2 id="detail-title"></h2><p id="detail-request"></p><details><summary>Supporting text and authority changes</summary><pre id="detail-context"></pre></details><p id="detail-expected"></p><div id="trials"></div></section>
+<p class="limitations">This is a fixed sample, not a security guarantee. The evaluation submits proposals directly to test the checks; the payment lab adds a human review step. Consistency compares payment fields and decisions, not wording. A consistent result can still be consistently wrong.</p>
+</div>
+<footer><p>Delegus / Northfield experiment<br>Synthetic suppliers · No real payments</p><p>Results are read from a local report. Refreshing this page does not make model calls or change payment authority.</p></footer>
+</main>
+</body></html>

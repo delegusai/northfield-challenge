@@ -191,6 +191,45 @@ class HTTPTests(unittest.TestCase):
         self.assertEqual(status, 502)
         self.assertEqual(self.request()[2]["ledger"], [])
 
+    def test_report_read_is_bounded_and_does_not_call_model(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        previous = self.server.report_file
+        try:
+            with TemporaryDirectory() as directory:
+                self.server.report_file = Path(directory) / "report.json"
+                self.assertFalse(self.request("/api/evaluation")[2]["available"])
+                self.server.report_file.write_text(json.dumps({"version":2,"results":[]}))
+                self.assertEqual(self.request("/api/evaluation")[2]["report"]["results"], [])
+                self.assertEqual(self.server.proposer.status()["calls_used"], 0)
+                self.assertEqual(self.request("/api/evaluation", {})[0], 404)
+                self.assertEqual(self.request("/api/evaluation", host="external.example")[0], 403)
+                self.assertEqual(self.request("/api/evaluation?file=.env.local")[0], 404)
+        finally:
+            self.server.report_file = previous
+
+    def test_report_errors_and_symlinks_are_safe(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        previous = self.server.report_file
+        try:
+            with TemporaryDirectory() as directory:
+                target = Path(directory) / "target.json"
+                self.server.report_file = target
+                target.write_text('{bad json')
+                self.assertEqual(self.request("/api/evaluation")[0], 500)
+                target.write_text('{"old":"format"}')
+                self.assertFalse(self.request("/api/evaluation")[2]["available"])
+                link = Path(directory) / "link.json"
+                link.symlink_to(target)
+                self.server.report_file = link
+                self.assertEqual(self.request("/api/evaluation")[0], 500)
+                self.server.report_file = target
+                target.write_text('x'*5_000_001)
+                self.assertEqual(self.request("/api/evaluation")[0], 500)
+        finally:
+            self.server.report_file = previous
+
     def test_cookie_isolation_reset_and_export_state(self):
         _, headers, _ = self.request()
         cookie = headers["Set-Cookie"].split(";")[0]

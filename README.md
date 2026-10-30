@@ -38,13 +38,27 @@ The tests cover exact limits, split payments, replayed requests, duplicate invoi
 
 The additional proposer tests cover malformed output, invented authority fields, model refusals, incomplete output, revocation between preparation and execution, concurrency, and call limits. They use injected responses and make no API requests.
 
-To run the live comparison (up to ten billed OpenAI requests):
+To run the expanded live comparison (50 scenarios, three trials each; up to 150 billed OpenAI requests):
 
 ```sh
-python3 evaluate.py --live
+python3 evaluate.py --live --repeats 3
 ```
 
-The report goes to ignored `reports/live-evaluation.json`. It compares ground-truth commands with model interpretations, distinguishing interpretation mistakes, authority violations, and unintended payments still inside an allowance. For measurement, this evaluator directly submits proposals in fresh synthetic sessions; the browser requires human review first. It stops after a provider error. A small passing test set does not establish general prompt-injection resistance or the security of Delegus or a public deployment.
+The report goes to ignored `reports/live-evaluation.json`, saved atomically after every trial. Open **Results** in the lab (or `/results`) and click **Refresh results** to inspect progress. The dashboard reads this one report and never starts billed model calls. You can filter by category, failures, inconsistency, or incomplete scenarios; open a scenario to compare expected and actual fields, decisions, and individual trial evidence; and download the report. A new comparison replaces the local report, so download or copy a run you want to keep first.
+
+The 50 fixtures cover ordinary payments, exact allowance boundaries, lookalike suppliers, missing fields, unsupported requests, misleading amounts, misleading payment identifiers, invoice extraction, duplicates, and authority changes. Each trial starts a fresh deterministic session, including controlled expiry and revocation between preparation and execution. Expectations live separately in `scenarios.py`; baseline commands are checked against explicit expected decision codes before calling the model. Repeats are interleaved in rounds. The dashboard counts only completed trials as observed results and distinguishes pending scenarios from failures. Consistency compares fields and decision codes; it does not imply correctness or independence of trials.
+
+The offline evaluation tests use a clearly identified oracle stub to test scoring, failed intent within the allowance, inconsistent trials, provider-error stopping, and report persistence. These are not model performance evidence.
+
+The live comparison It compares ground-truth commands with model interpretations, distinguishing interpretation mistakes, authority violations, and unintended payments still inside an allowance. For measurement, this evaluator directly submits proposals in fresh synthetic sessions; the browser requires human review first. It stops after a provider error. A small passing test set does not establish general prompt-injection resistance or the security of Delegus or a public deployment.
+
+To save a self-contained, interactive dashboard that opens offline:
+
+```sh
+python3 export_report.py --output reports/evaluation-dashboard.html
+```
+
+The saved file includes the synthetic report, styles, logo, fonts and license notices. Filters, trial details and report download work without the server. It has no model or payment controls and makes no external requests.
 
 ## Boundaries
 
@@ -64,7 +78,7 @@ The lab matches the current public Delegus identity: its logo and wordmark, Schi
 
 The natural-language request and attached text are sent to OpenAI, with `store: false`. The API key stays server-side. Use fictional data. The model receives no browser, network, filesystem, reset, or authority-changing tools. The only model endpoint used is OpenAI's Responses API; the client rejects redirects. The interface's logo and fonts still load locally.
 
-Each server run permits at most 40 model calls, one at a time, with 1,500 output tokens per request and a 45-second network timeout. There are no automatic retries. These are request and token caps, not a dollar budget or a guarantee of wall-clock completion. Model calls use the selected OpenAI project's billing. The CLI comparison has its own ten-call cap.
+Each server run permits at most 40 model calls, one at a time, with 1,500 output tokens per request and a 45-second network timeout. There are no automatic retries. These are request and token caps, not a dollar budget or a guarantee of wall-clock completion. Model calls use the selected OpenAI project's billing. The CLI comparison has a separate cap of 50 × repeats (default 150). It accepts one to five repeats, stops on the first provider error, and never retries automatically.
 
 Session downloads include the original natural-language requests, supporting text, model proposals, usage metadata, and payment decisions. These records remain unsigned and in memory until exported. Local reports and `.env.local` are ignored by Git and excluded from source archives.
 
