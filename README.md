@@ -91,3 +91,7 @@ Each server run permits at most 40 model calls, one at a time, with 1,500 output
 Session downloads include the original natural-language requests, supporting text, model proposals, usage metadata, and payment decisions. These records remain unsigned and in memory until exported. Local reports and `.env.local` are ignored by Git and excluded from source archives.
 
 API references: [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses), [GPT-5.4 Mini](https://developers.openai.com/api/docs/models/gpt-5.4-mini).
+
+## Contributors
+
+- [@haqinam](https://github.com/haqinam)

@@ -58,3 +58,7 @@ Research kit code and scenarios use the [MIT license](kit/LICENSE). This does no
 ## Diagnose errors without hiding them
 
 [Kit 1.1.0 diagnostics](kit-1.1.0/README.md#understand-failed-attempts) preserve error categories, elapsed time and available token usage. Optional redacted excerpts help diagnose rejected model proposals. [Synthetic report example](examples/diagnostic-report.json); [release notes](releases/research-v1.1.0.md). No new live model comparison is claimed by this release.
+
+## Contributors
+
+- [@haqinam](https://github.com/haqinam)
