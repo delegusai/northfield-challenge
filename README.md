@@ -94,4 +94,4 @@ API references: [Structured Outputs](https://developers.openai.com/api/docs/guid
 
 ## Contributors
 
-- [@haqinam](https://github.com/haqinam)
+- [@haqinam](https://github.com/haqinam) — Coder
