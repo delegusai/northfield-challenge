@@ -21,6 +21,7 @@ function render(next) {
   state = next;
   $('remaining').textContent = money(state.grant.remaining_cents);
   $('grant-state').textContent = state.grant.status;
+  $('grant-state').dataset.status = state.grant.status;
   $('meter-fill').style.width = `${100 * state.grant.remaining_cents / state.grant.limit_cents}%`;
   $('expires').textContent = 'Until ' + new Date(state.grant.expires_at * 1000).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
   $('revoke').disabled = busy || state.grant.status !== 'active';
@@ -46,7 +47,8 @@ function render(next) {
   }
 }
 
-function decision(title, text) {
+function decision(title, text, result = 'neutral') {
+  $('decision').dataset.result = result;
   $('decision').replaceChildren(element('span',title,'decision-label'),element('p',text));
   $('decision').classList.remove('updated');
   requestAnimationFrame(() => $('decision').classList.add('updated'));
@@ -71,7 +73,7 @@ $('proposal-form').addEventListener('submit', event => {
   run(async () => {
     const response = await api('/api/propose', {command:$('command').value,note:$('note').value});
     render(response.state);
-    decision(response.decision.result === 'recorded' ? 'Recorded in the simulated ledger' : 'Refused · No payment recorded', response.decision.reason);
+    decision(response.decision.result === 'recorded' ? 'Recorded in the simulated ledger' : 'Refused · No payment recorded', response.decision.reason, response.decision.result);
   });
 });
 
@@ -112,6 +114,7 @@ setInterval(() => {
   if (state && state.grant.status === 'active' && Date.now() >= state.grant.expires_at * 1000) {
     state.grant.status = 'expired';
     $('grant-state').textContent = 'expired';
+    $('grant-state').dataset.status = 'expired';
     $('revoke').disabled = true;
   }
 }, 1000);

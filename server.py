@@ -77,6 +77,12 @@ class Handler(BaseHTTPRequestHandler):
             except ValueError as error:
                 return self._send(429, {"error": str(error)})
         files = {"/": ("index.html", "text/html; charset=utf-8"), "/app.js": ("app.js", "text/javascript; charset=utf-8"), "/style.css": ("style.css", "text/css; charset=utf-8")}
+        # Exact asset map preserves the server's closed static-file boundary.
+        files["/assets/fonts.css"] = ("assets/fonts.css", "text/css; charset=utf-8")
+        files["/assets/delegus-mark.svg"] = ("assets/delegus-mark.svg", "image/svg+xml")
+        for font in ("schibsted-grotesk-600", "schibsted-grotesk-700", "public-sans-400", "public-sans-600", "martian-mono-400", "delegus-wordmark"):
+            asset = "assets/fonts/" + font + ".woff2"
+            files["/" + asset] = (asset, "font/woff2")
         if self.path not in files:
             return self._send(404, {"error": "Not found."})
         name, mime = files[self.path]

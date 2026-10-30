@@ -9,3 +9,5 @@ In the browser, an allowed $1,250 request produced one ledger entry. Repeating i
 Starting a new session cleared the records and restored the fixture allowance. The allowed-payment flow also worked at a 390-pixel viewport. The page's content width equaled the viewport width, with no horizontal page overflow. Desktop and mobile layouts were visually inspected. No browser errors or warnings were reported during the checked flow.
 
 These observations apply to this local scripted simulator. No language model was evaluated. No live product, real payment, production system, or public deployment was exercised. Records are unsigned and kept in process memory.
+
+The Delegus branding update was checked against the public site's current logo, font stylesheet, and color styles. All 18 tests still pass. The branded allowed-payment and refused-payment flows were checked in the browser; the logo and all font families loaded locally, with no browser warnings or errors. At 390 pixels the content width remained 390 pixels. The live site was only read.

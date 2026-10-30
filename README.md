@@ -47,3 +47,7 @@ The person running the lab can withdraw authority and reset the entire exercise.
 Records are unsigned and ephemeral. This is a single-process local lab, not a public challenge service. There is no durable audit storage, login system, cross-process transaction control, or cryptographic receipt verification. It includes no deploy workflows, production credentials, copied private source, or private repository history.
 
 See [the experiment plan](EXPERIMENT.md) for the questions to test next.
+
+## Delegus branding
+
+The lab matches the current public Delegus identity: its logo and wordmark, Schibsted Grotesk headings, Public Sans text, Martian Mono commands, navy grounds, and semantic color palette. Fonts and the logo are served locally, so the interface needs no external asset requests. See [asset attribution and font notices](web/assets/NOTICE.md).
