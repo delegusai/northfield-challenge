@@ -47,6 +47,10 @@ The public suite is small and deliberately selected. It does not establish gener
 
 ## Contribute
 
-[Open a research issue](https://github.com/delegusai/northfield-challenge/issues/new?template=research-case.md) with fictional inputs, all attempts, expected behavior, actual behavior and a replayable report. [Contribution guide](kit/CONTRIBUTING.md). Credit is opt-in; submissions need independent reproduction before acceptance.
+[Open a research issue](https://github.com/delegusai/northfield-challenge/issues/new) with fictional inputs, all attempts, expected behavior, actual behavior and a replayable report. [Contribution guide](kit/CONTRIBUTING.md). Credit is opt-in; submissions need independent reproduction before acceptance.
 
 Research kit code and scenarios use the [MIT license](kit/LICENSE). This does not grant rights to Delegus branding or third-party assets. The older Python experiment and its 150-trial report remain separate.
+
+## First comparison study
+
+[Read the 108-attempt pilot](study/RESULTS.md), inspect all model records, or [explore the charts](https://lab.delegus.ai/studies/northfield-pilot-001/). It keeps errors visible and makes no general model-ranking claim.

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="475" height="125" preserveAspectRatio="xMinYMin meet" viewBox="0 0 475 125" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="475" height="125"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-125)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="48" width="110" height="32" rx="4" ry="0" style="stroke: rgb(83%,87%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,98%); fill-rule: evenodd;"/>
+			<text x="10" y="61.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(8%,16%,27%); stroke:none;" transform="translate(0,122) scale(1,-1)">One model proposal</text>
+			<rect x="157" y="78" width="160" height="32" rx="4" ry="0" style="stroke: rgb(83%,87%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,98%); fill-rule: evenodd;"/>
+			<text x="167" y="91.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(27%,41%,69%); stroke:none;" transform="translate(0,182) scale(1,-1)">Format check</text>
+			<rect x="157" y="15" width="160" height="32" rx="4" ry="0" style="stroke: rgb(83%,87%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,98%); fill-rule: evenodd;"/>
+			<text x="167" y="28.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(19%,54%,47%); stroke:none;" transform="translate(0,56) scale(1,-1)">Format + authority check</text>
+			<rect x="363" y="78" width="110" height="32" rx="4" ry="0" style="stroke: rgb(83%,87%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,98%); fill-rule: evenodd;"/>
+			<text x="373" y="91.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(8%,16%,27%); stroke:none;" transform="translate(0,182) scale(1,-1)">Ledger copy A</text>
+			<rect x="363" y="15" width="110" height="32" rx="4" ry="0" style="stroke: rgb(83%,87%,91%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,98%); fill-rule: evenodd;"/>
+			<text x="373" y="28.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(8%,16%,27%); stroke:none;" transform="translate(0,56) scale(1,-1)">Ledger copy B</text>
+			<path d="M 110,64 L 132,64 Z" style="stroke: rgb(31%,39%,48%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 132,31 L 132,94 Z" style="stroke: rgb(31%,39%,48%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 132,94 L 157,94 Z" style="stroke: rgb(31%,39%,48%); stroke-linecap: butt; stroke-width: 1;"/>
+			<polygon points="157 94, 152 97, 152 91" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(31%,39%,48%); fill-rule: evenodd;"/>
+			<path d="M 132,31 L 157,31 Z" style="stroke: rgb(31%,39%,48%); stroke-linecap: butt; stroke-width: 1;"/>
+			<polygon points="157 31, 152 34, 152 28" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(31%,39%,48%); fill-rule: evenodd;"/>
+			<path d="M 317,94 L 363,94 Z" style="stroke: rgb(31%,39%,48%); stroke-linecap: butt; stroke-width: 1;"/>
+			<polygon points="363 94, 358 97, 358 91" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(31%,39%,48%); fill-rule: evenodd;"/>
+			<path d="M 317,31 L 363,31 Z" style="stroke: rgb(31%,39%,48%); stroke-linecap: butt; stroke-width: 1;"/>
+			<polygon points="363 31, 358 34, 358 28" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(31%,39%,48%); fill-rule: evenodd;"/>
+			<text x="0" y="2" style="font-family: Helvetica; font-size: 8px;fill: rgb(31%,39%,48%); stroke:none;" transform="translate(0,4) scale(1,-1)">Identical initial state. No second model call. No real payment.</text>
+		</g>
+	</g>
+</svg>
