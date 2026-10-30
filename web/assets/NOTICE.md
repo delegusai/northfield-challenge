@@ -4,4 +4,4 @@ At the owner's request, this experiment uses the public Delegus identity from ht
 
 The interface uses Schibsted Grotesk for headings, Public Sans for text, and Martian Mono for commands and identifiers. The Delegus wordmark font is a Bricolage Grotesque subset. These fonts are distributed under the SIL Open Font License; their copyright and license notices are retained in `fonts/licenses/`.
 
-The Delegus name and logo remain the owner's brand assets. Including them here does not grant a trademark license. This lab is a local scripted experiment and does not implement Delegus Check.
+The Delegus name and logo remain the owner's brand assets. Including them here does not grant a trademark license. This lab is a local payment experiment and does not implement Delegus Check.

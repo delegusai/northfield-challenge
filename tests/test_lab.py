@@ -166,6 +166,31 @@ class HTTPTests(unittest.TestCase):
         status, _, _ = self.request("/api/propose", {"command":command(), "limit_cents":100000000})
         self.assertEqual(status, 400)
 
+    def test_model_endpoint_prepares_without_executing(self):
+        from proposer import Proposer
+        model_output = dict(kind="proposal", amount_cents=125000, supplier="harbor-supply", invoice="inv-model", message="Proposed.")
+        previous = self.server.proposer
+        self.server.proposer = Proposer("test", send=lambda *_: {"status":"completed", "output":[{"type":"message", "content":[{"type":"output_text", "text":json.dumps(model_output)}]}]})
+        try:
+            status, headers, result = self.request("/api/interpret", {"request":"Pay Harbor Supply $1,250 for inv-model.", "note":""})
+            self.assertEqual(status, 200)
+            self.assertEqual(result["state"]["ledger"], [])
+            self.assertEqual(len(result["state"]["interpretations"]), 1)
+            cookie = headers["Set-Cookie"].split(";")[0]
+            self.request("/api/revoke", {}, cookie)
+            result = self.request("/api/propose", {"command":result["proposal"]["command"]}, cookie)[2]
+            self.assertEqual(result["decision"]["code"], "REVOKED")
+            self.assertEqual(result["state"]["ledger"], [])
+        finally:
+            self.server.proposer = previous
+
+    def test_model_endpoint_cannot_take_authority_or_secret_fields(self):
+        status, _, _ = self.request("/api/interpret", {"request":"Pay", "OPENAI_API_KEY":"test", "limit_cents":100000000})
+        self.assertEqual(status, 400)
+        status, _, _ = self.request("/api/interpret", {"request":"Pay"})
+        self.assertEqual(status, 502)
+        self.assertEqual(self.request()[2]["ledger"], [])
+
     def test_cookie_isolation_reset_and_export_state(self):
         _, headers, _ = self.request()
         cookie = headers["Set-Cookie"].split(";")[0]

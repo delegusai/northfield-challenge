@@ -1,6 +1,7 @@
 """An independent, in-memory authority experiment. No external services."""
 
 from dataclasses import dataclass
+from copy import deepcopy
 from datetime import datetime, timezone
 import re
 import threading
@@ -49,13 +50,15 @@ class Session:
         self.revoked = False
         self._ledger = []
         self._attempts = []
+        self._interpretations = []
         self._lock = threading.Lock()
 
     def _snapshot(self):
         spent = sum(row["amount_cents"] for row in self._ledger)
         return {
             "simulation": True,
-            "proposer": "scripted",
+            "proposer": "openai-and-command-baseline",
+            "interpretations": deepcopy(self._interpretations),
             "grant": {
                 "status": "revoked" if self.revoked else "expired" if self.clock() >= self.expires_at else "active",
                 "limit_cents": self.limit_cents,
@@ -71,6 +74,13 @@ class Session:
 
     def snapshot(self):
         with self._lock:
+            return self._snapshot()
+
+    def record_interpretation(self, request, note, proposal):
+        with self._lock:
+            if len(self._interpretations) >= 100:
+                raise ValueError("This session has reached its proposal limit.")
+            self._interpretations.append(deepcopy({"request":request,"note":note,"proposal":proposal}))
             return self._snapshot()
 
     def revoke(self):

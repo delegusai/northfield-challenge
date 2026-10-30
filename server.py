@@ -10,16 +10,18 @@ import threading
 import time
 
 from northfield import Session
+from proposer import Proposer, ProposerError, load_settings
 
 
 WEB = Path(__file__).parent / "web"
 
 
 class LabServer(ThreadingHTTPServer):
-    def __init__(self, port):
+    def __init__(self, port, proposer=None):
         super().__init__(("127.0.0.1", port), Handler)
         self.sessions = {}
         self.session_lock = threading.Lock()
+        self.proposer = proposer or Proposer()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -70,6 +72,8 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._valid_host():
             return self._send(403, {"error": "Use the printed local URL."})
+        if self.path == "/api/config":
+            return self._send(200, self.server.proposer.status())
         if self.path == "/api/session":
             try:
                 session, cookie = self._session()
@@ -92,7 +96,7 @@ class Handler(BaseHTTPRequestHandler):
         origin = "http://127.0.0.1:" + str(self.server.server_port)
         if not self._valid_host() or self.headers.get("Origin") != origin:
             return self._send(403, {"error": "Only requests from this local lab are accepted."})
-        if self.path not in ("/api/propose", "/api/revoke", "/api/reset"):
+        if self.path not in ("/api/propose", "/api/interpret", "/api/revoke", "/api/reset"):
             return self._send(404, {"error": "Not found."})
         try:
             size = int(self.headers.get("Content-Length", "0"))
@@ -101,11 +105,15 @@ class Handler(BaseHTTPRequestHandler):
             data = json.loads(self.rfile.read(size))
             if not isinstance(data, dict):
                 raise ValueError("Send a JSON object.")
-            expected = {"command", "note"} if self.path == "/api/propose" else set()
+            expected = {"request", "note"} if self.path == "/api/interpret" else {"command", "note"} if self.path == "/api/propose" else set()
             if set(data) - expected:
                 raise ValueError("Unknown fields are refused. Authority cannot be supplied in a request.")
             session, cookie = self._session(reset=self.path == "/api/reset")
-            if self.path == "/api/propose":
+            if self.path == "/api/interpret":
+                request, note = data.get("request"), data.get("note", "")
+                proposal = self.server.proposer.propose(request, note, "ai-" + secrets.token_hex(12))
+                result = {"proposal":proposal,"state":session.record_interpretation(request,note,proposal)}
+            elif self.path == "/api/propose":
                 result = session.submit(data.get("command"), data.get("note", ""))
             elif self.path == "/api/revoke":
                 result = session.revoke()
@@ -114,13 +122,16 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, result, cookie=cookie)
         except (ValueError, UnicodeError) as error:
             self._send(400, {"error": str(error)})
+        except ProposerError as error:
+            self._send(502, {"error":str(error)})
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Start the local Northfield simulation.")
     parser.add_argument("--port", type=int, default=8765)
     args = parser.parse_args()
-    server = LabServer(args.port)
+    key, model = load_settings(Path(__file__).parent)
+    server = LabServer(args.port, Proposer(key,model))
     print("Northfield simulation: http://127.0.0.1:%s" % server.server_port, flush=True)
     try:
         server.serve_forever()

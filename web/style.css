@@ -566,3 +566,10 @@ footer a { color: #eaf1f8; text-underline-offset: 3px; }
   .local { display: none; }
   h1 { font-size: 35px; }
 }
+
+.natural-form {border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 22px;}
+.natural-form .primary {margin-top: 16px;}
+.natural-examples {margin: 10px 0 18px;}
+#model-result {font-size: 12px; line-height: 1.6; margin: 14px 0 0; color: var(--ink); overflow-wrap: anywhere;}
+.review-heading {font-family: var(--display); font-size: 18px; margin: 0 0 6px; font-weight: 600;}
+.review-heading + p {margin-bottom: 15px!important;}

@@ -2,7 +2,7 @@
 
 Can someone tell an agent what to accomplish, set a boundary they understand, and verify what the agent actually did?
 
-The first slice uses purchasing because the outcome is concrete. A ledger entry either exists or it doesn't. A plausible sentence saying “paid” cannot stand in for that evidence.
+The experiment uses purchasing because the outcome is concrete. A ledger entry either exists or it doesn't. A plausible sentence saying “paid” cannot stand in for that evidence.
 
 ## Current slice
 
@@ -19,11 +19,11 @@ The fixed grant is a fixture. Editing grants in natural language, approval by a 
 
 These are usability questions to investigate, not results we have measured yet.
 
-## Next comparison
+## Model comparison
 
-Keep the same fixtures and authority checks. Compare this explicit-command baseline with a natural-language proposer that must return the same typed fields. Measure interpretation errors, invalid proposals, correct refusals, and unintended ledger entries separately. An agent being persuaded to propose a forbidden action and a forbidden action reaching the ledger are different outcomes.
+The live comparison keeps the same fixtures and authority checks. It compares the explicit-command baseline with an OpenAI proposer returning typed fields. It measures interpretation errors, invalid proposals, correct refusals, and unintended ledger entries separately. The UI adds a human review step before submission. An agent being persuaded to propose a forbidden action and a forbidden action reaching the ledger are different outcomes.
 
-The proposer must receive only its assigned context and a restricted payment-submission tool. It must not receive reset or revocation controls, credentials, arbitrary network access, or mutable authority state. Any model integration needs a separate evaluation before public exposure.
+The proposer must receive only its assigned context and a restricted payment-submission tool. It must not receive reset or revocation controls, credentials, arbitrary network access, or mutable authority state. The implemented proposer has no tools or access to mutable authority. The experiment still needs broader evaluation before public exposure.
 
 ## Publication boundary
 
