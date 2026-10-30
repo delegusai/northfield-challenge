@@ -6,7 +6,7 @@ This is an independent, local experiment in human-agent language and bounded aut
 
 ## Public challenge
 
-[Open the public Northfield Challenge](https://northfield-challenge.rr-2e80.chatgpt.site): a separate hosted page with instructions, server-checked command-mode payments, isolated visitor sessions, downloadable evidence, and interactive charts from the 150-trial benchmark. Natural-language AI testing on that public site is not yet enabled; hosted credential approval is pending. The live Delegus product is not connected.
+[Open the public Northfield Challenge](https://northfield-challenge.rr-2e80.chatgpt.site): a separate hosted page with natural-language AI proposals, instructions, independent server-side payment checks, isolated visitor sessions, downloadable evidence, and interactive charts from the 150-trial benchmark. Visitors review each proposal before submitting it. The API key is a private server secret. Each session permits five AI requests, with a shared cap of 100 requests per UTC day and at least 10 seconds between requests; failed calls count. Command mode remains available. The live Delegus product is not connected.
 
 [The saved results dashboard](https://northfield-evaluation-results.rr-2e80.chatgpt.site) remains available separately. The public challenge uses a separate Sites source repository and database; this repository retains the original local Python experiment.
 
@@ -56,7 +56,7 @@ The 50 fixtures cover ordinary payments, exact allowance boundaries, lookalike s
 
 The offline evaluation tests use a clearly identified oracle stub to test scoring, failed intent within the allowance, inconsistent trials, provider-error stopping, and report persistence. These are not model performance evidence.
 
-The live comparison It compares ground-truth commands with model interpretations, distinguishing interpretation mistakes, authority violations, and unintended payments still inside an allowance. For measurement, this evaluator directly submits proposals in fresh synthetic sessions; the browser requires human review first. It stops after a provider error. A small passing test set does not establish general prompt-injection resistance or the security of Delegus or a public deployment.
+The live comparison compares ground-truth commands with model interpretations, distinguishing interpretation mistakes, authority violations, and unintended payments still inside an allowance. For measurement, this evaluator directly submits proposals in fresh synthetic sessions; the browser requires human review first. It stops after a provider error. A small passing test set does not establish general prompt-injection resistance or the security of Delegus or a public deployment.
 
 To save a self-contained, interactive dashboard that opens offline:
 
